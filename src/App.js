@@ -22,7 +22,6 @@ console.log(store.getState());
 
 
 function App() {
-  // cart setup
 
   return (
     <main>
