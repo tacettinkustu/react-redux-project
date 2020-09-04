@@ -2,32 +2,24 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import CartContainer from "./components/CartContainer";
 import cartItems from "./cart-items";
-import {createStore} from "redux";
+import { createStore } from "redux";
+import reducer from "./reducer";
+import { Provider } from "react-redux";
 
 const initialStore = {
-  count:0,
+  cart: cartItems,
+  total: 0,
+  amount: 5,
 };
 
-function reducer(state,action){
-  console.log({state,action});
-  if(action.type === "DECREASE"){
-    return {count:state.count-1};
-  }
-  return state;
-};
-
-const store = createStore(reducer,initialStore);
-store.dispatch({type:"DECREASE"});
-console.log(store.getState());
-
+const store = createStore(reducer, initialStore);
 
 function App() {
-
   return (
-    <main>
-      <Navbar cart={store.getState()}/>
+    <Provider store={store}>
+      <Navbar />
       <CartContainer cart={cartItems} />
-    </main>
+    </Provider>
   );
 }
 
